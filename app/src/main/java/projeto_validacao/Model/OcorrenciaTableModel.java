@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -29,7 +30,7 @@ import javax.swing.table.AbstractTableModel;
 public class OcorrenciaTableModel extends AbstractTableModel {
 
     private List<OcorrenciaModel> list = new ArrayList();
-    private final String[] columnNames = {"ID", "LOCAL", "DATA", "DESCRIÇÃO"};
+    private final String[] columnNames = {"ID", "LOCAL", "DATA", "DESCRIï¿½ï¿½O"};
 
     public OcorrenciaTableModel(List<OcorrenciaModel> list) {
         this.list = list;
@@ -64,7 +65,8 @@ public class OcorrenciaTableModel extends AbstractTableModel {
             case 2:
                 ocorrencia = list.get(rowIndex);
                 if (ocorrencia.getData() != null) {
-                    return ocorrencia.getData().toLocaleString();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    return sdf.format(ocorrencia.getData());
                 }
                 return ocorrencia.getData();
             case 3:
@@ -103,11 +105,25 @@ public class OcorrenciaTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0: {
+                 if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Telefone  nï¿½o pode ser vazio.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 ocorrencia = list.get(rowIndex);
                 list.get(rowIndex).setId(Integer.parseInt(aValue.toString()));
                 break;
             }
             case 1: {
+                 if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Local  nï¿½o pode ser vazia.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 ocorrencia = list.get(rowIndex);
                 list.get(rowIndex).setLocal(aValue.toString());
                 ocorrencia.setId(list.get(rowIndex).getId());
@@ -119,6 +135,13 @@ public class OcorrenciaTableModel extends AbstractTableModel {
                 break;
             }
             case 2: {
+                 if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Data  nï¿½o pode ser vazio.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 ocorrencia = list.get(rowIndex);
 
                 try {
@@ -135,6 +158,13 @@ public class OcorrenciaTableModel extends AbstractTableModel {
                 break;
             }
             case 3: {
+                 if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Descrocap  nï¿½o pode ser vazia.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 ocorrencia = list.get(rowIndex);
                 list.get(rowIndex).setDescricao(aValue.toString());
                 ocorrencia.setId(list.get(rowIndex).getId());
@@ -147,7 +177,7 @@ public class OcorrenciaTableModel extends AbstractTableModel {
             }
 
             default:
-                System.out.println("Coluna não encontrada ou não editavel!");
+                System.out.println("Coluna nï¿½o encontrada ou nï¿½o editavel!");
                 break;
         }
     }

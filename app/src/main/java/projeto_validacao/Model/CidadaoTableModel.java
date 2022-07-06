@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -25,7 +26,7 @@ import javax.swing.table.AbstractTableModel;
 public class CidadaoTableModel extends AbstractTableModel {
 
     private List<CidadaoModel> list = new ArrayList();
-    private final String[] columnNames = {"ID", "NOME", "DOCUMENTO", "ENDEREÇO", "TELEFONE", "EMAIL"};
+    private final String[] columnNames = {"ID", "NOME", "DOCUMENTO", "ENDEREï¿½O", "TELEFONE", "EMAIL"};
 
     public CidadaoTableModel(List<CidadaoModel> list) {
         this.list = list;
@@ -140,6 +141,13 @@ public class CidadaoTableModel extends AbstractTableModel {
                 break;
             }
             case 4: {
+                if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Telefone  nï¿½o pode ser vazio.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 cidadao = list.get(rowIndex);
                 list.get(rowIndex).setTelefone(aValue.toString());
                 cidadao.setId(list.get(rowIndex).getId());
@@ -149,6 +157,13 @@ public class CidadaoTableModel extends AbstractTableModel {
                 break;
             }
             case 5: {
+                if (aValue == null || aValue.toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Endereco  nï¿½o pode ser vazio.",
+                            "Alerta!",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                }
                 cidadao = list.get(rowIndex);
                 list.get(rowIndex).setEmail(aValue.toString());
                 cidadao.setId(list.get(rowIndex).getId());
@@ -157,7 +172,7 @@ public class CidadaoTableModel extends AbstractTableModel {
                 break;
             }
             default:
-                System.out.println("Coluna não encontrada ou não editavel!");
+                System.out.println("Coluna nï¿½o encontrada ou nï¿½o editavel!");
                 break;
         }
     }

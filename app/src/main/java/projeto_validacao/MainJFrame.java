@@ -47,9 +47,9 @@ public class MainJFrame extends javax.swing.JFrame {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        this.add(new JLabel("CIDADÃOS"), c);
+        this.add(new JLabel("CIDADï¿½OS"), c);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("CIDADÃOS");
+        this.setTitle("CIDADï¿½OS");
         this.setSize(new Dimension(1366, 768));
         JTable table = new JTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
@@ -60,8 +60,8 @@ public class MainJFrame extends javax.swing.JFrame {
         c.gridheight = 1;
         c.gridwidth = 6;
         this.add(pane, c);
-        JButton btnSaveCidadao = new JButton("Salvar Alterações");
-        JButton btnAddCidadao = new JButton("Novo Cidadão");
+        JButton btnSaveCidadao = new JButton("Salvar Alteraï¿½ï¿½es");
+        JButton btnAddCidadao = new JButton("Novo Cidadï¿½o");
         c.gridy = 3;
         c.gridx = 1;
         c.gridwidth = 2;
@@ -78,7 +78,7 @@ public class MainJFrame extends javax.swing.JFrame {
         c.gridwidth = 6;
         c.gridx = 0;
         this.add(pane2, c);
-        JButton btnSaveOcorrencia = new JButton("Salvar Alterações");
+        JButton btnSaveOcorrencia = new JButton("Salvar Alteraï¿½ï¿½es");
         JButton btnAddOcorrencia = new JButton("Nova Ocorrencia");
         c.gridy = -5;
         c.gridx = 1;
@@ -110,18 +110,18 @@ public class MainJFrame extends javax.swing.JFrame {
                 for (OcorrenciaModel ocorrencia : ocorrenciaList) {
                     if (ocorrencia.getLocal() == null || ocorrencia.getLocal().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "Local  não pode ser vazio.",
+                                "Local  nï¿½o pode ser vazio.",
                                 "Alerta!",
                                 JOptionPane.WARNING_MESSAGE);
                     } else if (ocorrencia.getData() == null || ocorrencia.getData().toString().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "Data não pode ser vazia.",
+                                "Data nï¿½o pode ser vazia.",
                                 "Alerta!",
                                 JOptionPane.WARNING_MESSAGE);
 
                     } else if (ocorrencia.getDescricao() == null || ocorrencia.getDescricao().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "Descrição não pode ser vazioa.",
+                                "Descriï¿½ï¿½o nï¿½o pode ser vazio.",
                                 "Alerta!",
                                 JOptionPane.WARNING_MESSAGE);
 
@@ -145,12 +145,12 @@ public class MainJFrame extends javax.swing.JFrame {
                 for (CidadaoModel cidadao : cidadaoList) {
                     if (cidadao.getTelefone() == null || cidadao.getTelefone().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "Telefone  não pode ser vazio.",
+                                "Telefone  nï¿½o pode ser vazio.",
                                 "Alerta!",
                                 JOptionPane.WARNING_MESSAGE);
                     } else if (cidadao.getEndereco() == null || cidadao.getEndereco().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null,
-                                "Endereço não pode ser vazio.",
+                                "Endereï¿½o nï¿½o pode ser vazio.",
                                 "Alerta!",
                                 JOptionPane.WARNING_MESSAGE);
 
@@ -169,11 +169,13 @@ public class MainJFrame extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent me) {
                 int row = table.rowAtPoint(me.getPoint());
                 if (SwingUtilities.isRightMouseButton(me) == true) {
-                    int input = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o cidadao?", "Excluir Cidadão", JOptionPane.YES_NO_OPTION);
+                    int input = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o cidadao?", "Excluir Cidadï¿½o", JOptionPane.YES_NO_OPTION);
                     if (input == 0) {
                         CidadaoDAO.deleteCidadao(selectedId);
                         cidadaoList = CidadaoDAO.getCidadao();
                         table.setModel(new CidadaoTableModel(cidadaoList));
+                        ocorrenciaList = OcorrenciaDAO.getOcorrencias(selectedId);
+                        table2.setModel(new OcorrenciaTableModel(ocorrenciaList));
                     }
                 } else {
                     selectedId = cidadaoList.get(row).getId();
@@ -187,7 +189,7 @@ public class MainJFrame extends javax.swing.JFrame {
         table2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (SwingUtilities.isRightMouseButton(me) == true) {
-                    int input = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir a ocorrencia?", "Excluir Cidadão", JOptionPane.YES_NO_OPTION);
+                    int input = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir a ocorrencia?", "Excluir Cidadï¿½o", JOptionPane.YES_NO_OPTION);
                     if (input == 0) {
                         int row = table.rowAtPoint(me.getPoint());
                         OcorrenciaDAO.delete(ocorrenciaList.get(row).getId());

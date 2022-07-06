@@ -56,7 +56,7 @@ public class OcorrenciaDAO {
     }
 
     public static void updateOcorrencia(OcorrenciaModel ocorrencia) {
-        String sql = "UPDATE cidadao set local=?,data=?,descricao=? where id = ?;";
+        String sql = "UPDATE ocorrencia set local=?,data=?,descricao=? where id = ?;";
         try ( Connection conn = Persistence.getConnection();  PreparedStatement pstmt = conn.prepareStatement(sql)) {
             try {
                 pstmt.setString(1, ocorrencia.getLocal());
